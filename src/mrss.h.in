@@ -61,11 +61,11 @@ typedef enum {
   MRSS_VERSION_ATOM_1_0		/**< 1.0 Atom version */
 } mrss_version_t;
 
-/** Flag list for mrss_set and mrss_get functions */
+/** Flag list for mrss_get functions */
 typedef enum {
   /* Generic */
 
-  /** Set the ersion to a mrss_t element - the value is a mrss_version_t enum */
+  /** Set the version to a mrss_t element - the value is a mrss_version_t enum */
   MRSS_FLAG_VERSION = 1,
 
   /** Set the title to a mrss_t element - the value is a string */
@@ -615,34 +615,6 @@ mrss_error_t	mrss_parse_buffer	(char *		buffer,
 					 size_t		size_buffer,
 					 mrss_t **	mrss);
 
-/** WRITE FUNCTIONS *********************************************************/
-
-/** 
- * Writes a RSS struct data in a local file
- * \param mrss the rss struct data
- * \param file the local file
- * \return the error code
- */
-mrss_error_t	mrss_write_file		(mrss_t *	mrss,
-					 char *		file);
-
-/**
- * Write a RSS struct data in a buffer.
- *
- * \code
- * char *buffer;
- * buffer=NULL; //<--- This is important!!
- * mrss_write_buffer (mrss, &buffer);
- * \endcode
- *
- * The buffer must be NULL.
- * \param mrss the rss struct data
- * \param buffer the buffer
- * \return the error code
- */
-mrss_error_t	mrss_write_buffer	(mrss_t *	mrss,
-					 char **	buffer);
-
 /** FREE FUNCTION ***********************************************************/
 
 /** 
@@ -768,22 +740,6 @@ mrss_error_t	mrss_get_last_modified_with_options_and_error
 mrss_error_t	mrss_new		(mrss_t **	mrss);
 
 /**
- * For insert/replace/remove a flags use this function as this example:
- * \code
- * mrss_set(mrss, MRSS_FLAG_TITLE, "hello world", MRSS_FLAG_END);
- * mrss_set(item, MRSS_FLAG_DESCRIPTION, NULL, MRSS_FLAG_END);
- * \endcode
- *
- * \param element it is the mrss data that you want changes the the next
- * list of elements. The list is composted by KEY - VALUES and as last
- * element MRSS_FLAG_END. The variable of value depends from key.
- * \see mrss_flag_t
- * \return the error code
- */
-mrss_error_t	mrss_set		(mrss_generic_t	element,
-					 ...);
-
-/**
  * This function returns the request arguments. The syntax is the same of
  * mrss_set but the values of the list are pointer to data element (int *,
  * char **). If the key needs a char **, the value will be allocated.
@@ -796,48 +752,6 @@ mrss_error_t	mrss_set		(mrss_generic_t	element,
  */
 mrss_error_t	mrss_get		(mrss_generic_t	element,
 					 ...);
-
-/**
- * This function adds an element to another element. For example you can
- * add a item to a channel, or a category to a item, and so on. Look this
- * example:
- * \code
- *  mrss_item_t *item = NULL;
- * mrss_hour_t *hour = NULL;
- * mrss_day_t day;              // If the element is no null, the function
- * mrss_category_t category,    // does not alloc it
- *
- * mrss_new_subdata(mrss, MRSS_ELEMENT_ITEM, &item);
- * mrss_new_subdata(mrss, MRSS_ELEMENT_SKIPHOURS, &hour);
- * mrss_new_subdata(mrss, MRSS_ELEMENT_SKIPDAYS, &day);
- * mrss_new_subdata(item, MRSS_ELEMENT_ITEM_CATEGORY, &category);
- * \endcode
- * \param element it is the parent element
- * \param subelement it is the type of the child (MRSS_ELEMENT_ITEM,
- * MRSS_ELEMENT_CATEGORY, ...)
- * \param subdata it is the pointer to the new struct. If the pointer
- * of *subdata exists, it will no alloced, else yes.
- * \return the error code
- * \see mrss_element_t
- */
-mrss_error_t	mrss_new_subdata	(mrss_generic_t	element,
-					 mrss_element_t	subelement,
-					 mrss_generic_t	subdata);
-
-/**
- * This function removes a subdata element. As first argoment you must specify
- * the parent, and second argoment the child.
- * \code
- * mrss_remove_subdata(mrss, item);
- * \endcode
- * \param element it is the parent
- * \param subdata the child that you want remove. Remember: 
- * mrss_remove_subdata does not free the memory. So you can remove a item
- * and reinsert it after.
- * \return the error code
- */
-mrss_error_t	mrss_remove_subdata	(mrss_generic_t	element,
-					 mrss_generic_t	subdata);
 
 /* TAGS FUNCTIONS **********************************************************/
 

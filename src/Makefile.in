@@ -76,9 +76,8 @@ am__uninstall_files_from_dir = { \
 am__installdirs = "$(DESTDIR)$(libdir)" "$(DESTDIR)$(incdir)"
 LTLIBRARIES = $(lib_LTLIBRARIES)
 libmrss_la_LIBADD =
-am_libmrss_la_OBJECTS = mrss_free.lo mrss_parser.lo mrss_write.lo \
-	mrss_download.lo mrss_edit.lo mrss_generic.lo mrss_options.lo \
-	mrss_search.lo
+am_libmrss_la_OBJECTS = mrss_free.lo mrss_parser.lo mrss_download.lo \
+	mrss_edit.lo mrss_generic.lo mrss_options.lo mrss_search.lo
 libmrss_la_OBJECTS = $(am_libmrss_la_OBJECTS)
 libmrss_la_LINK = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) \
 	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
@@ -230,7 +229,6 @@ lib_LTLIBRARIES = libmrss.la
 libmrss_la_SOURCES = \
 	mrss_free.c \
 	mrss_parser.c \
-	mrss_write.c \
 	mrss_download.c \
 	mrss_edit.c \
 	mrss_generic.c \
@@ -324,7 +322,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/mrss_options.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/mrss_parser.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/mrss_search.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/mrss_write.Plo@am__quote@
 
 .c.o:
 @am__fastdepCC_TRUE@	$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<

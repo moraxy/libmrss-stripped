@@ -3,7 +3,6 @@ lib_LTLIBRARIES = libmrss.la
 libmrss_la_SOURCES = \
 	mrss_free.c \
 	mrss_parser.c \
-	mrss_write.c \
 	mrss_download.c \
 	mrss_edit.c \
 	mrss_generic.c \
